@@ -1,11 +1,11 @@
-#create new main for PyPoll
+
 import os
 import csv
 
 
 # Set the path for the CSV file in PyPollcsv
 
-PyPollcsv = os.path.join("./election_data.csv")
+PyPollcsv = os.path.join("Resources","election_data.csv")
 
 # Initialize the variables and Create the empty lists for Candidates and their votes.
 candidates = []
@@ -14,7 +14,7 @@ vote_percent = []
 winner_list = []
 total_votes = 0
 #Creates the dictionary to be used for candidate name and vote count.
-poll = {}
+cadidate_dic = {}
 
 
 # Open the CSV using the set path PyPollcsv
@@ -28,23 +28,23 @@ with open(PyPollcsv, newline="") as csvfile:
     #keeps a total vote count by counting up 1 for each loop (# of rows w/o header)
     for row in csvreader:
         total_votes = total_votes + 1
-        if row[2] in poll.keys():
-            poll[row[2]] = poll[row[2]] + 1
+        if row[2] in cadidate_dic.keys():
+            cadidate_dic[row[2]] = cadidate_dic[row[2]] + 1
         else:
-            poll[row[2]] = 1
+            cadidate_dic[row[2]] = 1
  
-    # test print(poll) here
-    #print (poll)
+    # test print(cadidate_dic) here
+    #print (cadidate_dic)
 #takes dictionary keys and values and set them into the Candidate list and num_votes list 
-# candidates and num_votes
-for key, value in poll.items():
+
+for key, value in cadidate_dic.items():
     candidates.append(key)
     num_votes.append(value)
 
 
 for n in num_votes:
     vote_percent.append(round(n/total_votes*100,3))
-    print(vote_percent)
+    
 
 # creat final tuples (unchangeable) for my lists.
 final_list = list(zip(candidates, num_votes, vote_percent))
